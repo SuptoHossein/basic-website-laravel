@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\User;
-use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 class UserController extends Controller
 {
