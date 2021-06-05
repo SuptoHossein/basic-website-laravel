@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\User;
 use Illuminate\Http\Request;
+use Auth;
+use App\User;
 
-class UserController extends Controller
+class ProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data = User::all();
-        return view('admin.users.index', compact('data'));
+        $user = Auth::user()->id;
+        $data = User::find($user);
+        return view('admin.profile.index', compact('data'));
     }
 
     /**
@@ -26,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        //
     }
 
     /**
@@ -37,20 +39,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'role' => 'required',
-            'name' => 'required',
-            'email' => "required|unique:users,email|email",
-            'password' => 'required|min:8|max:64'
-        ]);
-        $user = new User();
-        $user->role = $request->role;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-
-        return redirect()->route('user.index');
+        //
     }
 
     /**
@@ -61,7 +50,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-
+        //
     }
 
     /**
@@ -72,8 +61,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data = User::find($id);
-        return view('admin.users.edit', compact('data'));
+        $user = Auth::user()->id;
+        $data = User::find($user);
+        return view('admin.profile.edit', compact('data'));
     }
 
     /**
@@ -85,17 +75,30 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request->input);
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required',
+            'address' => 'required|min:5',
+            'mobile' => 'required|numeric',
+            'gender' => 'required',
         ]);
-
-        $data = User::find($id);
-        $data->role = $request->role;
+        $user = Auth::user()->id;
+        $data = User::find($user);
         $data->name = $request->name;
-        return $data->name;
-        // $data->save();
-        // return redirect()->route('user.index');
+        $data->address = $request->address;
+        $data->mobile = $request->mobile;
+        $data->gender = $request->gender;
+
+        // Image uploads
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            @unlink(public_path('upload/user_images' . $data->image));
+            $filename = date('Ymd').$file->getClientOriginalName();
+            $file->move(public_path('upload/user_image/'), $filename);
+            $data['image'] = $filename;
+        }
+
+        $data->save();
+        return redirect()->route('profile.index');
     }
 
     /**
@@ -106,11 +109,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::find($id);
-        if (file_exists('public/upload/user_images/' . $user->image) && !empty($user->image)) {
-            unlink('public/upload/user_images' . $user->image);
-        }
-        $user->delete();
-        return redirect()->back();
+        //
     }
 }

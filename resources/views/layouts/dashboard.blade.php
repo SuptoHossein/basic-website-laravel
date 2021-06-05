@@ -239,6 +239,8 @@
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('backend') }}/build/js/custom.min.js"></script>
 
+    @yield('liveShowImageUpload')
+
 </body>
 
 </html>

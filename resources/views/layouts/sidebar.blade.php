@@ -9,6 +9,11 @@
                 </ul>
             </li>
 
+            <li><a><i class="fa fa-desktop"></i> Manage Profile <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('profile.index') }}">Profile</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 
