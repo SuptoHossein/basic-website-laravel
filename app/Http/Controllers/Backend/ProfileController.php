@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use Illuminate\Validation\Rule;
 
 class ProfileController extends Controller
 {
@@ -110,5 +111,28 @@ class ProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function passwordView()
+    {
+        return view('admin.profile.editPassword');
+    }
+
+    public function passwordUpdate(Request $request)
+    {
+        if (Auth::attempt(['id' => Auth::user()->id, 'password' => $request->old_password])) {
+            $this->validate($request, [
+                'new_password' => 'required| min:8',
+                // 'password2' => ['required', Rule::in(['password2', 'new_password'])]
+            ]);
+
+            $user = User::find(Auth::user()->id);
+            $user->password = bcrypt($request->new_password);
+            $user->save();
+            return redirect()->route('user.index');
+        } else {
+            return redirect()->back();
+        }
     }
 }

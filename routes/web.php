@@ -19,6 +19,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function() {
 
     Route::resource('user', 'Backend\UserController');
     Route::resource('profile', 'Backend\ProfileController');
+    Route::get('password/view', 'Backend\ProfileController@passwordView')->name('profile.password.view');
+    Route::post('password/update', 'Backend\ProfileController@passwordUpdate')->name('profile.password.update');
 
 
 });

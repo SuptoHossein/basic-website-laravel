@@ -14,6 +14,12 @@
                     <li><a href="{{ route('profile.index') }}">Profile</a></li>
                 </ul>
             </li>
+
+            <li><a><i class="fa fa-desktop"></i> Manage Password <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('profile.password.view') }}">Change Password</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 

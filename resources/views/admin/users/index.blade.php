@@ -69,18 +69,12 @@
                                         <td>
                                             <a href="" class="btn btn-primary btn-sm"><i class="fa fa-eye"></i></a>
                                             <a href="{{ route('user.edit', [$value->id]) }}" class="btn btn-success btn-sm"><i class="fa fa-edit"></i></a>
-                                            {{-- <a href="{{ route('user.destroy', [$value->id]) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a> --}}
-                                            {{-- <form action="{{ route('user.destroy', [$user->id]) }}" class="mr-1" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger btn-sm"> <i class="fas fa-trash"></i> </button>
-                                            </form> --}}
-
 
                                             <form action="{{ route('user.destroy', [$value->id]) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

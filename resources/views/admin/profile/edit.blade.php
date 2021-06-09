@@ -145,22 +145,11 @@
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="image">
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-
                                     @if ($data->image)
                                         <img class="img-responsive avatar-view"  alt="Avatar" title="Change the avatar" style="with:300px; height: 300px;" src="{{ url('upload/user_image/'.$data->image) }}">
                                     @else
-                                        <img class="img-responsive avatar-view"  alt="Avatar" title="Change the avatar" style="with:300px; height: 300px;" src="{{ url('upload/demo.png') }}">
+                                        <img class="img-responsive avatar-view"  alt="Avatar" title="Change the avatar" style="with:300px; height: 300px;" src="{{ asset('upload/demo.png') }}">
                                     @endif
-
-
-
-
-                                    {{-- <img class="img-responsive avatar-view"  alt="Avatar" title="Change the avatar" style="with:300px; height: 300px;"
-                                    @if ($data->image)
-                                        src="{{ url('upload/user_image/'.$data->image) }}">
-                                    @else
-                                        {{  url('upload/demo.png') }}
-                                    @endif --}}
                                 </div>
                             </div>
 
