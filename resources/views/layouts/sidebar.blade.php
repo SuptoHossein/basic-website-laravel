@@ -20,6 +20,13 @@
                     <li><a href="{{ route('profile.password.view') }}">Change Password</a></li>
                 </ul>
             </li>
+
+
+            <li><a><i class="fa fa-desktop"></i> Todo List <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('todo.index') }}">Todos</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 
